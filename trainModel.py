@@ -2,7 +2,7 @@ from sklearn.multioutput import MultiOutputClassifier
 from sklearn.linear_model import LogisticRegression
 from loadDataset import load_and_vectorize_data
 
-# Function to train the model
+
 def train_model(X, y):
     model = MultiOutputClassifier(LogisticRegression(solver='liblinear'))
     model.fit(X, y)

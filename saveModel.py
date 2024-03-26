@@ -1,6 +1,5 @@
 from joblib import dump
 
-# Function to save the model to a file
 def save_model(model, filename):
     dump(model, filename)
 
