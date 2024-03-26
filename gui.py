@@ -13,9 +13,17 @@ def start_gui(model, vectorizer):
     def on_classify_button_click():
         comment = input_text_area.get("1.0", tk.END).strip()
         prediction = make_prediction(model, vectorizer, comment)
-        result_display_area.config(state=tk.NORMAL)  # Enable the widget before inserting
-        result_display_area.insert(tk.END, str(prediction) + '\n')
+        categories = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
+        if any(prediction[0]):
+             prediction_text = "Categories: " + ", ".join([categories[i] for i, pred in enumerate(prediction[0]) if pred == 1])
+        else:
+             prediction_text = "Your comment is perfectly fine."
+    
+        result_display_area.config(state=tk.NORMAL)
+        result_display_area.delete('1.0', tk.END)
+        result_display_area.insert(tk.END, prediction_text + '\n')
         result_display_area.config(state=tk.DISABLED)
+
 
     # Example components
     input_text_area = scrolledtext.ScrolledText(window, wrap=tk.WORD, width=40, height=10)
